@@ -1,69 +1,55 @@
-1: Create the project folder and starter files
-cd ~/devops-practicals
-mkdir -p StudentManagement
-cd StudentManagement
-@ cat > index.html <<'EOF'
-<!doctype html>
-<html><head><title>Student Management</title></head><body>
-<h1>Student Management</h1><p>Manage student records.</p>
-</body></html>
-EOF
+1. Install Git, JDK 17, Maven, VS Code, Google Chrome (and Jenkins for Q6, Q7).
+2. Open VS Code > Terminal > New Terminal (Ctrl + `). Every "Run in terminal" below is
+typed/pasted here.
+3. Run in terminal:
+git --version
+java -version
+mvn -v
+git config --global user.name "Arth Sinha"
+git config --global user.email "artsin124@gmail.com"
+git config --global init.defaultBranch main
+4. If git log / git diff ever shows : at the bottom, press q to get back.
 
-@ cat > students.txt <<'EOF'
-101, Asha, Information Technology
-102, Rahul, Computer Engineering
-103, Meera, Electronics
-EOF
-
-cat > README.md <<'EOF'
-# Student Management
-A simple project used for practicing Git version control.
-EOF
-
-echo "Starter project for Git initialization, tracking, commits, modifications and comparison." > README.txt
-
-ls -l
-Step 2: Initialize the repository and show configuration
-bash
+1. Download the Q1_StudentManagement folder from ma'am's Drive (Download all), extract it to
+the Desktop and open it in VS Code (File > Open Folder).
+2. In Drive, students, README and README.md are Google Docs (they download as Word files)
+- open each in Drive, copy the text and save it in VS Code as students.txt, README.txt and
+README.md. Then delete the downloaded .docx copies from the folder.
+SCREENSHOT 1: VS Code - Explorer panel on the left showing all files
+3. Run in terminal:
 git init
 git config user.name
 git config user.email
 git config --list
-ls -a
-Step 3: Track, stage and commit
-bash
+SCREENSHOT 2: VS Code terminal - after running the commands
+4. Run in terminal:
 git status
 git add index.html
 git status
 git add .
 git status
-git commit -m "Initial commit: Student Management starter files"
-Step 4: Modify files, commit, view history
-bash
-echo "104, Arth, Information Technology" >> students.txt
-
-cat > index.html <<'EOF'
-<!doctype html>
-<html><head><title>Student Management</title></head><body>
-<h1>Student Management</h1><p>Manage student records - add, view and update students.</p>
-</body></html>
-EOF
-
+git commit -m "Initial commit"
+SCREENSHOT 3: VS Code terminal - green staged files + commit line
+5. In students.txt add a new last line 104, Arth, Information Technology. In index.html change
+Manage student records. to Manage student records - add, view and update. Save both
+(Ctrl+S).
+6. Run in terminal:
 git status
-git add students.txt index.html
+git add .
 git commit -m "Add student 104 and update description"
 git log
 git log --oneline
-Step 5: Compare changes
-bash
-echo "105, Neha, AI and Data Science" >> students.txt
+SCREENSHOT 4: VS Code terminal - git log output
+7. In students.txt add a new last line 105, Neha, AI and Data Science and save.
+8. Run in terminal:
 git diff
 git add students.txt
 git diff --staged
 git commit -m "Add student 105"
 git diff HEAD~1 HEAD
-git diff HEAD~2 HEAD -- students.txt
-Step 6: Final status
-bash
+git diff HEAD~2 HEAD
+SCREENSHOT 5: VS Code terminal - green +/red - lines of git diff
+9. Run in terminal:
 git status
 git log --oneline
+SCREENSHOT 6: VS Code terminal - "nothing to commit, working tree clean"
