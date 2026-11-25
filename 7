@@ -1,0 +1,24 @@
+1. Download the Q7_JenkinsJava folder from ma'am's Drive (Download all), extract it to C:\ (so the
+path is C:\Q7_JenkinsJava) and open it in VS Code (File > Open Folder).
+SCREENSHOT 1: VS Code editor - Student.java open
+2. Run in terminal:
+java -version
+javac -version
+where.exe java
+3. Jenkins > Manage Jenkins > Tools > JDK installations > Add JDK > Name JDK17, untick
+Install automatically, JAVA_HOME = your JDK folder (e.g. C:\Program Files\Java\jdk-17) > Save.
+SCREENSHOT 2: VS Code terminal (java -version) + Browser - Jenkins Tools page with JDK17
+4. New Item > JenkinsJava > Freestyle project > OK.
+5. General > Advanced > tick Use custom workspace > Directory:
+C:\Q7_JenkinsJava
+6. Add build step > Execute Windows batch command > paste:
+java -version
+javac Student.java
+java Student
+dir *.class
+SCREENSHOT 3: Browser - Jenkins Configure page (custom workspace + build step)
+7. Save > Build Now > #1 > Console Output (shows Student Details, Finished: SUCCESS).
+SCREENSHOT 4: Browser - Jenkins job page with green tick
+SCREENSHOT 5: Browser - Jenkins #1 > Console Output page
+8. Job page > Workspace - shows Student.class.
+SCREENSHOT 6: Browser - Jenkins Workspace page showing Student.class
