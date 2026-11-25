@@ -1,0 +1,47 @@
+1. Download the Q5_GitMergeConflict folder from ma'am's Drive (Download all), extract it to the
+Desktop and open it in VS Code (File > Open Folder).
+2. In Drive, conflict-demo is a Google Doc - open it, copy the text and save it in VS Code as
+conflict-demo.txt. Then delete the downloaded .docx copies from the folder.
+3. Run in terminal:
+git init
+git add .
+git commit -m "Initial commit"
+git branch -M main
+git branch feature
+git branch
+SCREENSHOT 1: VS Code terminal - init + commit output
+SCREENSHOT 2: VS Code terminal - git branch output (main and feature)
+4. Run in terminal:
+git checkout feature
+5. In conflict-demo.txt change the Venue line to Venue: Open Air Theatre and save.
+6. Run in terminal:
+git commit -am "Feature branch: change venue"
+git checkout main
+7. In conflict-demo.txt (now back on main) change the Venue line to Venue: Seminar Hall 3 and
+save.
+8. Run in terminal:
+git commit -am "Main branch: change venue"
+git log --oneline --graph --all
+git merge feature
+SCREENSHOT 3: VS Code terminal - git log --graph showing two branches
+SCREENSHOT 4: VS Code terminal - red "CONFLICT" message
+9. Terminal shows CONFLICT. Open conflict-demo.txt - you will see the conflict markers:
+<<<<<<< HEAD
+Venue: Seminar Hall 3
+=======
+Venue: Open Air Theatre
+>>>>>>> feature
+SCREENSHOT 5: VS Code editor - conflict-demo.txt showing <<<<<<< ======= >>>>>>>
+10. Delete the 3 marker lines and keep only one Venue line (e.g. Venue: Seminar Hall 3). Save.
+(Or click Accept Current Change in VS Code.)
+SCREENSHOT 6: VS Code editor - conflict-demo.txt after removing markers
+
+1
+
+11. Run in terminal:
+git status
+git add conflict-demo.txt
+git commit -m "Resolve merge conflict"
+git log --oneline --graph --all
+SCREENSHOT 7: VS Code terminal - commit output of the merge
+SCREENSHOT 8: VS Code terminal - final git log --graph output
