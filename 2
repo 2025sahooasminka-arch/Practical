@@ -1,0 +1,32 @@
+1. Download the Q2_CollegeWebsite folder from ma'am's Drive (Download all), extract it to the
+Desktop and open it in VS Code (File > Open Folder).
+2. In Drive, about is a Google Doc - open it, copy the text and save it in VS Code as about.txt.
+Then delete the downloaded .docx copies from the folder.
+SCREENSHOT 1: VS Code - Explorer panel showing index.html, style.css, about.txt
+3. On github.com: + > New repository > name CollegeWebsite > Public > do NOT add README
+> Create repository.
+SCREENSHOT 2: Browser - github.com page right after creating the repo
+4. Run in terminal (replace YOUR_USERNAME; sign in when the browser window opens):
+git init
+git add .
+git commit -m "Initial commit: College website"
+git branch -M main
+git remote add origin https://github.com/YOUR_USERNAME/CollegeWebsite.git
+git remote -v
+git push -u origin main
+SCREENSHOT 3: VS Code terminal - git remote -v output
+SCREENSHOT 4: VS Code terminal - push output ending with "main -> main"
+5. Refresh the GitHub page - the files are uploaded.
+SCREENSHOT 5: Browser - GitHub repo page with files listed
+6. In index.html add <li>Artificial Intelligence and Data Science</li> after the Electronics item,
+and change the email to admissions@example.edu. Save.
+7. Create file notice.txt and paste:
+Admissions open for academic year 2026-27.
+8. Run in terminal:
+git status
+git add .
+git commit -m "Add new course, update email, add notice"
+git push
+git log --oneline
+9. Refresh GitHub - new file and latest commit are visible.
+SCREENSHOT 6: Browser - GitHub repo page showing notice.txt and the newest commit message
