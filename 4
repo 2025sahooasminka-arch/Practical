@@ -1,0 +1,49 @@
+1. Download the Q4_LibraryManagement folder from ma'am's Drive (Download all), extract it to
+the Desktop and open it in VS Code (File > Open Folder).
+2. In Drive, books and README.md are Google Docs (they download as Word files) - open each
+in Drive, copy the text and save it in VS Code as books.txt and README.md. Then delete the
+downloaded .docx copies from the folder.
+SCREENSHOT 1: VS Code - Explorer panel showing books.txt and README.md
+3. Run in terminal:
+git init
+git add README.md
+git commit -m "Add README"
+git add books.txt
+git commit -m "Add initial book list"
+4. In books.txt add line B004, Atomic Habits, James Clear and save.
+5. Run in terminal:
+git commit -am "Add book B004"
+6. In books.txt add line B005, Deep Work, Cal Newport and save.
+7. Run in terminal:
+git commit -am "Add book B005"
+SCREENSHOT 2: VS Code terminal - the commit output lines
+8. Run in terminal:
+git log
+git log --oneline --graph
+git log --stat
+SCREENSHOT 3: VS Code terminal - git log --oneline --graph output
+9. File-specific history:
+git log --oneline books.txt
+git log -p books.txt
+SCREENSHOT 4: VS Code terminal - git log books.txt output
+10. Add line B006, Ikigai, Hector Garcia in books.txt and line Maintained by IT Department in
+README.md. Save both.
+11. Stage only books.txt, then compare (books.txt = staged, README.md = unstaged):
+git add books.txt
+git status
+git diff
+git diff --staged
+SCREENSHOT 5: VS Code terminal - git status (staged + not staged sections) and git diff output
+
+1
+
+12. Compare two commits:
+git log --oneline
+git diff HEAD~3 HEAD
+git show HEAD
+SCREENSHOT 6: VS Code terminal - git diff HEAD~3 HEAD output
+13. Run in terminal:
+git add .
+git commit -m "Add B006 and maintainer info"
+git status
+SCREENSHOT 7: VS Code terminal - "nothing to commit, working tree clean"
