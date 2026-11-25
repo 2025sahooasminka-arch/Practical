@@ -1,0 +1,75 @@
+1. Download the Q9_SeleniumLoginDemo folder from ma'am's Drive (Download all), extract it to
+the Desktop and open it in VS Code (File > Open Folder). Make sure a screenshots folder is inside
+it.
+SCREENSHOT 1: VS Code - Explorer panel + pom.xml open
+2. Double-click webapp\index.html in File Explorer to show the login page in the browser.
+SCREENSHOT 2: Browser - Student Login page
+3. Open src/test/java/LoginTest.java (from Drive) and replace all its code with:
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.io.FileHandler;
+import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+public class LoginTest {
+private WebDriver driver;
+@BeforeEach
+public void setUp() {
+ChromeOptions options = new ChromeOptions();
+driver = new ChromeDriver(options);
+driver.manage().window().maximize();
+Path page = Paths.get("webapp", "index.html").toAbsolutePath();
+driver.get(page.toUri().toString());
+}
+@Test
+public void validLoginShouldShowSuccessMessage() throws Exception {
+driver.findElement(By.id("username")).sendKeys("student");
+driver.findElement(By.id("password")).sendKeys("Selenium@123");
+driver.findElement(By.id("loginBtn")).click();
+String message = driver.findElement(By.id("message")).getText();
+assertEquals("Login successful!", message);
+Thread.sleep(1500);
+saveScreenshot("successful-login.png");
+}
+
+1
+
+@Test
+public void invalidLoginShouldShowErrorMessage() throws Exception {
+driver.findElement(By.id("username")).sendKeys("wronguser");
+driver.findElement(By.id("password")).sendKeys("wrongpass");
+driver.findElement(By.id("loginBtn")).click();
+String message = driver.findElement(By.id("message")).getText();
+assertEquals("Invalid username or password!", message);
+Thread.sleep(1500);
+saveScreenshot("invalid-login.png");
+}
+private void saveScreenshot(String fileName) throws Exception {
+File source = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+File destination = new File("screenshots/" + fileName);
+FileHandler.copy(source, destination);
+}
+@AfterEach
+public void tearDown() {
+if (driver != null) {
+driver.quit();
+}
+}
+}
+SCREENSHOT 3: VS Code editor - LoginTest.java open
+4. Run in terminal (Chrome opens by itself and logs in; ends with Tests run: 2, Failures: 0):
+mvn test
+SCREENSHOT 4: Chrome window opened by the test - "Login successful!" (green)
+SCREENSHOT 5: Chrome window opened by the test - "Invalid username or password!" (red)
+5. Open the screenshots folder - successful-login.png and invalid-login.png are saved there.
+SCREENSHOT 6: File Explorer / VS Code Explorer - screenshots folder with the 2 PNGs
+SCREENSHOT 7: VS Code terminal - "Tests run: 2, Failures: 0" and BUILD SUCCESS
