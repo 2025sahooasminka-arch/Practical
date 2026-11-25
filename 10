@@ -1,0 +1,37 @@
+1. First time only: sign up at gitlab.com and verify your account (phone number, sometimes card) -
+otherwise pipelines get stuck on "verify your account".
+2. On gitlab.com: New project > Create blank project > name GitLabBasicBuild > untick
+"Initialize repository with a README" > Create project.
+SCREENSHOT 1: Browser - new GitLab project page
+3. Download the Q10_GitLabBasicBuild folder from ma'am's Drive (Download all), extract it to the
+Desktop and open it in VS Code (File > Open Folder).
+4. In Drive, README.md is a Google Doc - open it, copy the text and save it in VS Code as
+README.md. Then delete the downloaded .docx copies from the folder.
+5. Open .gitlab-ci.yml (from Drive) and replace all its code with:
+stages:
+- build
+build_job:
+stage: build
+script:
+- echo "Starting sample build"
+- ls -la
+- echo "Build completed successfully"
+SCREENSHOT 2: VS Code editor - .gitlab-ci.yml open
+SCREENSHOT 3: Browser - GitLab Build > Pipeline editor showing the job
+6. Run in terminal (replace YOUR_USERNAME):
+git init
+git add .
+git commit -m "Add GitLab CI build pipeline"
+git branch -M main
+git remote add origin https://gitlab.com/YOUR_USERNAME/GitLabBasicBuild.git
+git push -u origin main
+7. On first push a sign-in window opens - log in to GitLab. If it asks for a password, use an access
+token instead: GitLab > Avatar > Preferences > Access tokens > tick write_repository > create
+> paste the token as the password.
+SCREENSHOT 4: Browser - GitLab project page listing the files
+8. GitLab > Build > Pipelines - the pipeline starts by itself; wait for Passed (first run takes 1-3 min;
+stuck on "pending" = account not verified).
+SCREENSHOT 5: Browser - GitLab Build > Pipelines (status running)
+SCREENSHOT 6: Browser - GitLab Build > Pipelines (status Passed)
+9. Click the pipeline > build_job to see the job log (Job succeeded).
+SCREENSHOT 7: Browser - GitLab build_job log page
