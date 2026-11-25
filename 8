@@ -1,0 +1,70 @@
+1. Download the Q8_JUnitCalculator folder from ma'am's Drive (Download all), extract it to the
+Desktop and open it in VS Code (File > Open Folder).
+SCREENSHOT 1: VS Code - Explorer panel (folders) + pom.xml open in editor
+SCREENSHOT 2: VS Code editor - Calculator.java open
+2. Open src/test/java/CalculatorTest.java (from Drive) and replace all its code with:
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+public class CalculatorTest {
+private Calculator calculator;
+@BeforeEach
+public void setUp() {
+calculator = new Calculator();
+}
+@Test
+public void testAddition() {
+int result = calculator.add(10, 5);
+assertEquals(15, result);
+}
+@Test
+public void testSubtraction() {
+int result = calculator.subtract(10, 4);
+assertEquals(6, result);
+}
+@Test
+public void testMultiplication() {
+int result = calculator.multiply(6, 7);
+assertEquals(42, result);
+}
+@Test
+public void testDivision() {
+double result = calculator.divide(10, 4);
+assertEquals(2.5, result, 0.0001);
+}
+@Test
+public void testDivisionByZero() {
+assertThrows(IllegalArgumentException.class, () -> calculator.divide(10,
+0));
+}
+@Test
+
+1
+
+public void testAdditionWithNegativeNumbers() {
+int result = calculator.add(-8, -2);
+assertEquals(-10, result);
+}
+@Test
+public void testMultiplicationByZero() {
+assertEquals(0, calculator.multiply(25, 0));
+}
+}
+SCREENSHOT 3: VS Code editor - CalculatorTest.java open
+3. Run in terminal (shows Tests run: 7, Failures: 0, BUILD SUCCESS):
+mvn clean test
+SCREENSHOT 4: VS Code terminal - "Tests run: 7, Failures: 0" and BUILD SUCCESS
+4. To show a failed test: in CalculatorTest.java change assertEquals(15, result); to
+assertEquals(16, result); and save.
+5. Run in terminal (shows Failures: 1, BUILD FAILURE):
+mvn test
+SCREENSHOT 5: VS Code terminal - "Failures: 1" and BUILD FAILURE
+6. Test reports:
+dir target\surefire-reports
+mvn surefire-report:report
+7. Open target\reports\surefire.html (or target\site\surefire-report.html) in the browser.
+SCREENSHOT 6: VS Code Explorer (target/surefire-reports) or Browser - surefire.html report
+8. Change 16 back to 15 and save.
+9. Run in terminal:
+mvn clean test
+SCREENSHOT 7: VS Code terminal - BUILD SUCCESS again
