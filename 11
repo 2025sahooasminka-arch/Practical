@@ -1,0 +1,63 @@
+1. First time only: sign up at gitlab.com and verify your account (phone number, sometimes card) -
+otherwise pipelines get stuck on "verify your account".
+2. On gitlab.com: New project > Create blank project > name GitLabJavaMaven > untick
+"Initialize repository with a README" > Create project.
+3. Download the Q11_GitLabJavaMaven folder from ma'am's Drive (Download all), extract it to the
+Desktop and open it in VS Code (File > Open Folder).
+SCREENSHOT 1: VS Code editor - MessageService.java open
+4. Open src/test/java/com/example/MessageServiceTest.java (from Drive) and replace all its
+code with:
+package com.example;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+class MessageServiceTest {
+private final MessageService service = new MessageService();
+@Test
+void shouldReturnWelcomeMessage() {
+assertEquals("Welcome to the DevOps practical examination",
+service.getMessage());
+}
+@Test
+void shouldCalculateTotal() {
+assertEquals(30, service.calculateTotal(10, 20));
+}
+}
+SCREENSHOT 2: VS Code editor - MessageServiceTest.java open
+5. Open .gitlab-ci.yml (from Drive) and replace all its code with:
+image: maven:3.9-eclipse-temurin-11
+stages:
+- build
+- test
+build_job:
+stage: build
+script:
+- mvn clean compile
+test_job:
+stage: test
+script:
+- mvn test
+
+1
+
+SCREENSHOT 3: VS Code editor - pom.xml open
+SCREENSHOT 4: VS Code editor - .gitlab-ci.yml open
+6. Run in terminal to check locally (Tests run: 2, Failures: 0):
+mvn clean test
+7. Run in terminal (replace YOUR_USERNAME):
+git init
+git add .
+git commit -m "Java app with GitLab CI build and test stages"
+git branch -M main
+git remote add origin https://gitlab.com/YOUR_USERNAME/GitLabJavaMaven.git
+git push -u origin main
+8. On first push a sign-in window opens - log in to GitLab. If it asks for a password, use an access
+token instead: GitLab > Avatar > Preferences > Access tokens > tick write_repository > create
+> paste the token as the password.
+9. GitLab > Build > Pipelines > open the pipeline - build and test stages run by themselves (first
+run takes 1-3 min; stuck on "pending" = account not verified).
+SCREENSHOT 5: Browser - GitLab pipeline page with build and test stages
+10. Click build_job (BUILD SUCCESS), then test_job (Tests run: 2, Failures: 0). Pipeline shows
+Passed.
+SCREENSHOT 6: Browser - GitLab build_job log page
+SCREENSHOT 7: Browser - GitLab test_job log page (Tests run: 2)
+SCREENSHOT 8: Browser - GitLab Build > Pipelines list showing Passed
