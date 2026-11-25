@@ -1,0 +1,61 @@
+1. Download the Q6_JenkinsBuildJob folder from ma'am's Drive (Download all), extract it to C:\
+(so the path is C:\Q6_JenkinsBuildJob) and open it in VS Code (File > Open Folder).
+
+2. In Drive, build-info is a Google Doc - open it, copy the text and save it in VS Code as build-
+info.txt. Then delete the downloaded .docx copies (build-info, README, scripts\build.bat) from the
+
+folder.
+3. Create scripts\build.bat in VS Code and paste (the Drive copy is a Google Doc with TODOs):
+@echo off
+echo ====================================
+echo JENKINS FREESTYLE BUILD
+echo ====================================
+REM TODO 1: Display a welcome message with project name
+echo Welcome to Jenkins Freestyle Build
+echo Build Started Successfully
+REM TODO 2: Display current date and time
+echo Date: %DATE%
+echo Time: %TIME%
+REM TODO 3: Display logged-in username
+echo User: %USERNAME%
+REM TODO 4: Display operating system information
+ver
+REM TODO 5: Display current working directory
+echo Current Directory: %CD%
+REM Create output directory
+if not exist output mkdir output
+echo Output directory created
+REM TODO 6: Create build-report.txt inside output
+echo Project Name: Jenkins Freestyle Build > output\build-report.txt
+echo Build Date: %DATE% %TIME% >> output\build-report.txt
+echo Build Status: SUCCESS >> output\build-report.txt
+echo Computer: %COMPUTERNAME% > output\system-info.txt
+ver >> output\system-info.txt
+if not exist BuildOutput mkdir BuildOutput
+copy /Y build-info.txt BuildOutput\build-info.txt
+REM TODO 7: Display the contents of build-report.txt
+type output\build-report.txt
+
+1
+
+echo ====================================
+echo BUILD COMPLETED
+echo ====================================
+exit /b 0
+4. Open http://localhost:8080 and log in to Jenkins.
+SCREENSHOT 1: Browser - Jenkins home page (localhost:8080)
+5. New Item > name Jenkins_Freestyle_Build > Freestyle project > OK.
+6. Under General click Advanced > tick Use custom workspace > Directory:
+C:\Q6_JenkinsBuildJob
+SCREENSHOT 2: Browser - Jenkins job Configure page (General section with custom workspace)
+7. Build Steps > Add build step > Execute Windows batch command > paste:
+call scripts\build.bat
+SCREENSHOT 3: Browser - Jenkins Configure page, Build Steps section
+8. Click Save > Build Now.
+SCREENSHOT 4: Browser - Jenkins job page with green tick on #1
+9. Click #1 > Console Output (ends with Finished: SUCCESS).
+SCREENSHOT 5: Browser - Jenkins #1 > Console Output page
+10. Job page > Workspace > open BuildOutput\build-info.txt and output\build-report.txt.
+SCREENSHOT 6: Browser - Jenkins Workspace page showing BuildOutput/build-info.txt
+11. Click Build Now 2 more times to show Build History.
+SCREENSHOT 7: Browser - Jenkins job page, Build History panel (#1, #2, #3)
