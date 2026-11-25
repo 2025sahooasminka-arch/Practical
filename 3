@@ -1,0 +1,25 @@
+1. Open the examiner's repo on GitHub, click the green Code button and copy the link. (If it is not
+your repo, click Fork first and copy your fork's link.)
+SCREENSHOT 1: Browser - the examiner's repo page on GitHub
+2. Run in terminal (put the real link and the repo folder name):
+cd ~/Desktop
+git clone PASTE_REPO_LINK_HERE
+cd REPO_NAME
+code .
+git log --oneline
+git remote -v
+SCREENSHOT 2: VS Code - Explorer panel with the cloned files + clone output in terminal
+3. In VS Code edit README.md - add a line Updated by Arth Sinha - and save. Create a new file
+CHANGELOG.md with the text Added contributor details.
+4. Run in terminal:
+git status
+git diff
+git add .
+git commit -m "Update README and add CHANGELOG"
+git log -1 --stat
+git push
+SCREENSHOT 3: VS Code terminal - git status showing modified README.md and new
+CHANGELOG.md
+SCREENSHOT 4: VS Code terminal - git log -1 --stat output
+5. Refresh the repo on GitHub - your commit and new file are visible.
+SCREENSHOT 5: Browser - GitHub repo page showing your commit and CHANGELOG.md
